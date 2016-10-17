@@ -17,7 +17,7 @@ export default class StoriesList extends Component {
   }
 
   render() {
-    const { stories, currentUser } = this.props;
+    const { stories } = this.props;
     return (  
       <div className="container">
         { /* SEARCH */}
@@ -89,12 +89,11 @@ export default class StoriesList extends Component {
             <Link to={`/users/${story.author_id}`}>{story.author.name}</Link>
           </li>
         </ul>
-        { currentUser ?
+       
         <button className="btn btn-default btn-xs" onClick={ () => removeStory(story.id) }>
           <span className="glyphicon glyphicon-remove"></span>
         </button>
-        : <div></div>
-        }
+        
       </li>
     );
   }

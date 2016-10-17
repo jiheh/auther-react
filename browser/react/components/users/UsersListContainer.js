@@ -2,7 +2,7 @@ import { connect } from'react-redux';
 import UsersList from './UsersList';
 import { removeUser, addUser } from '../../reducers/users';
 
-const mapStateToProps = ({ users, currentUser }) => ({ users, currentUser })
+const mapStateToProps = ({ users }) => ({ users })
 
 const mapDispatchToProps = { removeUser, addUser }
 

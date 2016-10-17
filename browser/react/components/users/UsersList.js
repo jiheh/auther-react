@@ -18,7 +18,7 @@ export default class extends Component {
   }
 
   render() {
-    const { users, currentUser } = this.props;
+    const { users } = this.props;
     return (
       <div className="container">
         <div className="user-query">
@@ -53,8 +53,7 @@ export default class extends Component {
               <div className="media-right media-middle"></div>
             </div>
           </div>
-          {            
-            currentUser ? 
+       
               <div className="list-group-item min-content user-item">
                 <div className="media">
                   <div className="media-left media-middle icon-container">
@@ -86,8 +85,7 @@ export default class extends Component {
                   <div className="media-right media-middle"></div>
                 </div>
               </div>
-            : <div></div>
-          }
+            
         </div>
         <br />
         <br />
