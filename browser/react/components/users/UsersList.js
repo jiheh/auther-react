@@ -114,10 +114,10 @@ export default class extends Component {
   } 
 
   renderUser(user, index) {
-    const { removeUser, currentUser } = this.props;
+    const { removeUser } = this.props;
     return (
       <div key={index} className="list-group-item min-content user-item">
-        <UserItem user={user} removeUser={removeUser} currentUser={currentUser}/>
+        <UserItem user={user} removeUser={removeUser} />
       </div> 
     )
   }

@@ -46,10 +46,9 @@ export default class StoriesList extends Component {
         <br />
 
         <ul className="list-group">
-        { currentUser ?
+        
           <NewStoryWidgetContainer />
-          : <div></div>
-        }
+          
           { 
             stories
               .filter(this.filterStoryItem) 

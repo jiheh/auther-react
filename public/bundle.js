@@ -31801,8 +31801,7 @@
 	
 	var mapStateToProps = function mapStateToProps(_ref) {
 	  var users = _ref.users;
-	  var currentUser = _ref.currentUser;
-	  return { users: users, currentUser: currentUser };
+	  return { users: users };
 	};
 	
 	var mapDispatchToProps = { removeUser: _users.removeUser, addUser: _users.addUser };
@@ -31870,9 +31869,7 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var _props = this.props;
-	      var users = _props.users;
-	      var currentUser = _props.currentUser;
+	      var users = this.props.users;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -31931,7 +31928,7 @@
 	              _react2.default.createElement('div', { className: 'media-right media-middle' })
 	            )
 	          ),
-	          currentUser ? _react2.default.createElement(
+	          _react2.default.createElement(
 	            'div',
 	            { className: 'list-group-item min-content user-item' },
 	            _react2.default.createElement(
@@ -31972,7 +31969,7 @@
 	              ),
 	              _react2.default.createElement('div', { className: 'media-right media-middle' })
 	            )
-	          ) : _react2.default.createElement('div', null)
+	          )
 	        ),
 	        _react2.default.createElement('br', null),
 	        _react2.default.createElement('br', null),
@@ -32004,14 +32001,12 @@
 	  }, {
 	    key: 'renderUser',
 	    value: function renderUser(user, index) {
-	      var _props2 = this.props;
-	      var removeUser = _props2.removeUser;
-	      var currentUser = _props2.currentUser;
+	      var removeUser = this.props.removeUser;
 	
 	      return _react2.default.createElement(
 	        'div',
 	        { key: index, className: 'list-group-item min-content user-item' },
-	        _react2.default.createElement(_UserItem2.default, { user: user, removeUser: removeUser, currentUser: currentUser })
+	        _react2.default.createElement(_UserItem2.default, { user: user, removeUser: removeUser })
 	      );
 	    }
 	  }, {
@@ -32124,9 +32119,7 @@
 					)
 				)
 			),
-	
-			//Visibility Control for logged in user
-			currentUser ? _react2.default.createElement(
+			_react2.default.createElement(
 				'div',
 				{ className: 'media-right media-middle' },
 				_react2.default.createElement(
@@ -32139,10 +32132,6 @@
 						} },
 					_react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' })
 				)
-			) : _react2.default.createElement(
-				'div',
-				{ className: 'media-right media-middle' },
-				_react2.default.createElement('br', null)
 			)
 		);
 	};
@@ -32305,7 +32294,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -32331,110 +32320,109 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var UserDetail = function (_Component) {
-			_inherits(UserDetail, _Component);
+		_inherits(UserDetail, _Component);
 	
-			function UserDetail(props) {
-					_classCallCheck(this, UserDetail);
+		function UserDetail(props) {
+			_classCallCheck(this, UserDetail);
 	
-					var _this = _possibleConstructorReturn(this, (UserDetail.__proto__ || Object.getPrototypeOf(UserDetail)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (UserDetail.__proto__ || Object.getPrototypeOf(UserDetail)).call(this, props));
 	
-					_this.renderStory = _this.renderStory.bind(_this);
-					return _this;
+			_this.renderStory = _this.renderStory.bind(_this);
+			return _this;
+		}
+	
+		_createClass(UserDetail, [{
+			key: 'render',
+			value: function render() {
+				var _props = this.props;
+				var user = _props.user;
+				var stories = _props.stories;
+	
+				return _react2.default.createElement(
+					'div',
+					{ className: 'container' },
+					_react2.default.createElement(_UserItem2.default, { user: user }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'panel panel-warning' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'panel-heading' },
+							_react2.default.createElement(
+								'h2',
+								{ className: 'panel-title large-font' },
+								'stories'
+							)
+						),
+						_react2.default.createElement(
+							'ul',
+							{ className: 'list-group' },
+							_react2.default.createElement(
+								'p',
+								{ className: 'list-group-item story-item' },
+								_react2.default.createElement('span', null),
+								_react2.default.createElement(
+									'button',
+									{ className: 'btn btn-warning btn-xs' },
+									_react2.default.createElement('span', { className: 'glyphicon glyphicon-plus' })
+								)
+							),
+							stories.map(this.renderStory)
+						)
+					)
+				);
 			}
+		}, {
+			key: 'renderStory',
+			value: function renderStory(story, index) {
 	
-			_createClass(UserDetail, [{
-					key: 'render',
-					value: function render() {
-							var _props = this.props;
-							var user = _props.user;
-							var stories = _props.stories;
+				return _react2.default.createElement(
+					'li',
+					{ key: index,
+						className: 'list-group-item story-item' },
+					_react2.default.createElement(
+						'ul',
+						{ className: 'list-inline' },
+						_react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ className: 'large-font', to: '/stories/' + story.id },
+								story.title
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								'span',
+								null,
+								'by'
+							)
+						),
+						_react2.default.createElement(
+							'li',
+							null,
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ to: '/users/' + story.author_id },
+								story.author.name
+							)
+						)
+					),
+					_react2.default.createElement(
+						'button',
+						{ className: 'btn btn-default btn-xs', onClick: function onClick() {
+								return removeStory(story.id);
+							} },
+						_react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' })
+					)
+				);
+			}
+		}]);
 	
-							return _react2.default.createElement(
-									'div',
-									{ className: 'container' },
-									_react2.default.createElement(_UserItem2.default, { user: user }),
-									_react2.default.createElement(
-											'div',
-											{ className: 'panel panel-warning' },
-											_react2.default.createElement(
-													'div',
-													{ className: 'panel-heading' },
-													_react2.default.createElement(
-															'h2',
-															{ className: 'panel-title large-font' },
-															'stories'
-													)
-											),
-											_react2.default.createElement(
-													'ul',
-													{ className: 'list-group' },
-													_react2.default.createElement(
-															'p',
-															{ className: 'list-group-item story-item' },
-															_react2.default.createElement('span', null),
-															_react2.default.createElement(
-																	'button',
-																	{ className: 'btn btn-warning btn-xs' },
-																	_react2.default.createElement('span', { className: 'glyphicon glyphicon-plus' })
-															)
-													),
-													stories.map(this.renderStory)
-											)
-									)
-							);
-					}
-			}, {
-					key: 'renderStory',
-					value: function renderStory(story, index) {
-							var currentUser = this.props.currentUser;
-	
-							return _react2.default.createElement(
-									'li',
-									{ key: index,
-											className: 'list-group-item story-item' },
-									_react2.default.createElement(
-											'ul',
-											{ className: 'list-inline' },
-											_react2.default.createElement(
-													'li',
-													null,
-													_react2.default.createElement(
-															_reactRouter.Link,
-															{ className: 'large-font', to: '/stories/' + story.id },
-															story.title
-													)
-											),
-											_react2.default.createElement(
-													'li',
-													null,
-													_react2.default.createElement(
-															'span',
-															null,
-															'by'
-													)
-											),
-											_react2.default.createElement(
-													'li',
-													null,
-													_react2.default.createElement(
-															_reactRouter.Link,
-															{ to: '/users/' + story.author_id },
-															story.author.name
-													)
-											)
-									),
-									!currentUser ? _react2.default.createElement(
-											'button',
-											{ className: 'btn btn-default btn-xs', onClick: function onClick() {
-															return removeStory(story.id);
-													} },
-											_react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' })
-									) : _react2.default.createElement('div', null)
-							);
-					}
-			}]);
-	
-			return UserDetail;
+		return UserDetail;
 	}(_react.Component);
 	
 	exports.default = UserDetail;
@@ -49533,9 +49521,7 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      var _props = this.props;
-	      var stories = _props.stories;
-	      var currentUser = _props.currentUser;
+	      var stories = this.props.stories;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -49583,7 +49569,7 @@
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'list-group' },
-	          currentUser ? _react2.default.createElement(_NewStoryWidgetContainer2.default, null) : _react2.default.createElement('div', null),
+	          _react2.default.createElement(_NewStoryWidgetContainer2.default, null),
 	          stories.filter(this.filterStoryItem).map(this.renderStoryItem)
 	        )
 	      );
@@ -49608,9 +49594,9 @@
 	  }, {
 	    key: 'renderStoryItem',
 	    value: function renderStoryItem(story, index) {
-	      var _props2 = this.props;
-	      var removeStory = _props2.removeStory;
-	      var currentUser = _props2.currentUser;
+	      var _props = this.props;
+	      var removeStory = _props.removeStory;
+	      var currentUser = _props.currentUser;
 	
 	
 	      return _react2.default.createElement(
@@ -49648,13 +49634,13 @@
 	            )
 	          )
 	        ),
-	        currentUser ? _react2.default.createElement(
+	        _react2.default.createElement(
 	          'button',
 	          { className: 'btn btn-default btn-xs', onClick: function onClick() {
 	              return removeStory(story.id);
 	            } },
 	          _react2.default.createElement('span', { className: 'glyphicon glyphicon-remove' })
-	        ) : _react2.default.createElement('div', null)
+	        )
 	      );
 	    }
 	  }]);

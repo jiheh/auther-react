@@ -43,9 +43,8 @@ export default ({user, removeUser, glyphicon, currentUser}) => {
 		      </span>
 		    </h5>
 		  </Link> 
-		  {
-		  	//Visibility Control for logged in user
-		  	currentUser ?
+		 
+		  
 			<div className="media-right media-middle">
 				<button className="btn btn-default" 
 								onClick={event => {
@@ -56,8 +55,7 @@ export default ({user, removeUser, glyphicon, currentUser}) => {
 				  <span className="glyphicon glyphicon-remove"></span>
 				</button>
 			</div>
-			: <div className="media-right media-middle"><br/></div>
-		}
+			
 		</div>
 	)
 }
