@@ -46,6 +46,9 @@ router.get('/:id', function (req, res, next) {
 router.put('/:id', function (req, res, next) {
   req.story.update(req.body)
   .then(function (story) {
+    return story.reload({include: [{model: User, as: 'author'}]});
+  })
+  .then(function (story) {
     res.json(story);
   })
   .catch(next);
