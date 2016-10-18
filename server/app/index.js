@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict';
 
 var app = require('express')();
 var path = require('path');
@@ -14,14 +14,29 @@ app.use(session({
 	secret: 'thisisasecret'
 }));
 
-app.use(function (req, res, next) {
-  console.log('session', req.session);
-  next();
+// app.use(function (req, res, next) {
+//   console.log('session', req.session);
+//   next();
+// });
+
+app.post('/login', function(req, res, next) {
+  User.findOne({
+    where: req.body
+  }).
+  then( function (user) {
+    // console.log("**** user ****", user);
+    if (user) {
+      req.session.userId = user.id;
+      console.log("req.session after SQL", req.session);
+      res.sendStatus(204);
+    } else {
+      res.sendStatus(401);
+    }
+
+  })
+  .catch(next);
 });
 
-app.use('/login', function(req, res, next) {
-	
-});
 
 app.use('/api', require('../api/api.router'));
 
