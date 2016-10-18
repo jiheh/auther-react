@@ -2,11 +2,26 @@
 
 var app = require('express')();
 var path = require('path');
+var session = require('express-session');
 var User = require('../api/users/user.model');
 
 app.use(require('./logging.middleware'));
 app.use(require('./request-state.middleware'));
 app.use(require('./statics.middleware'));
+
+// Session must be placed before the routes
+app.use(session({
+	secret: 'thisisasecret'
+}));
+
+app.use(function (req, res, next) {
+  console.log('session', req.session);
+  next();
+});
+
+app.use('/login', function(req, res, next) {
+	
+});
 
 app.use('/api', require('../api/api.router'));
 
