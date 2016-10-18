@@ -5,13 +5,16 @@ var path = require('path');
 var session = require('express-session');
 var User = require('../api/users/user.model');
 
+
 app.use(require('./logging.middleware'));
 app.use(require('./request-state.middleware'));
 app.use(require('./statics.middleware'));
 
+
+
 // Session must be placed before the routes
 app.use(session({
-	secret: 'thisisasecret'
+  secret: 'thisisasecret'
 }));
 
 // app.use(function (req, res, next) {
@@ -35,6 +38,16 @@ app.post('/login', function(req, res, next) {
 
   })
   .catch(next);
+});
+
+app.get("/logout", function(req, res, next){
+  console.log("req.session right before ", req.session);
+
+
+  // req.session.destroy();
+  next();
+  console.log("***** req.session after ", req.session);
+  // res.sendStatus(204);
 });
 
 

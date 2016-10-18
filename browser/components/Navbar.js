@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from'react-redux';
 import { Link, browserHistory } from 'react-router';
+import {logOutUserServer} from "../redux/currentUser"
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -61,7 +62,7 @@ class Navbar extends React.Component {
     return (
       <ul className="nav navbar-nav navbar-right">
         <li>
-        <button className="navbar-btn btn btn-default" 
+        <button className="navbar-btn btn btn-default"
           onClick={this.props.logout}>logout</button>
         </li>
       </ul>
@@ -76,6 +77,8 @@ const mapProps = null;
 const mapDispatch = dispatch => ({
   logout: () => {
     console.log('You signed out. Sorta.')
+    //Consider changing state of currentUser
+    dispatch(logOutUserServer()); // do we need to invoke logoutserver() or logoutserver
     browserHistory.push('/');
   }
 })

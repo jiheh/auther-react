@@ -7,6 +7,7 @@ const CREATE     = 'CREATE_USER'
 const REMOVE     = 'REMOVE_USER'
 const UPDATE     = 'UPDATE_USER'
 
+
 /* ------------   ACTION CREATORS     ------------------ */
 
 const init  = users => ({ type: INITIALIZE, users })
@@ -14,13 +15,12 @@ const create = user  => ({ type: CREATE, user })
 const remove = id    => ({ type: REMOVE, id })
 const update = user  => ({ type: UPDATE, user })
 
-
 /* ------------       REDUCER     ------------------ */
 
 export default function reducer (users = [], action) {
   switch (action.type) {
-    
-    case INITIALIZE: 
+
+    case INITIALIZE:
       return action.users
 
     case CREATE:
@@ -35,7 +35,7 @@ export default function reducer (users = [], action) {
         .map(story => (
           action.user.id === user.id ? action.user : user))
 
-    default: 
+    default:
       return users;
   }
 }
