@@ -47,32 +47,41 @@ class Navbar extends React.Component {
 
   renderLoginSignup() {
     return (
-      <ul className="nav navbar-nav navbar-right">
-        <li>
-         <Link to="/signup" activeClassName="active">signup</Link>
-        </li>
-        <li>
-          <Link to="/login" activeClassName="active">login</Link>
-        </li>
-      </ul>
+      <div>
+        {this.props.currentUser.email ? <div></div> :
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+             <Link to="/signup" activeClassName="active">signup</Link>
+            </li>
+            <li>
+              <Link to="/login" activeClassName="active">login</Link>
+            </li>
+          </ul>
+        }
+      </div>
     );
   }
 
   renderLogout() {
     return (
-      <ul className="nav navbar-nav navbar-right">
-        <li>
-        <button className="navbar-btn btn btn-default"
-          onClick={this.props.logout}>logout</button>
-        </li>
-      </ul>
+      <div>
+        {this.props.currentUser.email ?
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+            <button className="navbar-btn btn btn-default"
+              onClick={this.props.logout}>logout</button>
+            </li>
+          </ul>
+          : <div></div>
+        }
+      </div>
     );
   }
 }
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapProps = null;
+const mapProps = ({currentUser}) => ({currentUser});
 
 const mapDispatch = dispatch => ({
   logout: () => {

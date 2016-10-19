@@ -41,13 +41,11 @@ app.post('/login', function(req, res, next) {
 });
 
 app.get("/logout", function(req, res, next){
-  console.log("req.session right before ", req.session);
+  // console.log("req.session right before ", req.session);
 
-
-  // req.session.destroy();
-  next();
-  console.log("***** req.session after ", req.session);
-  // res.sendStatus(204);
+  req.session.destroy();
+  res.sendStatus(204);
+  console.log(req.session)
 });
 
 
