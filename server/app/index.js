@@ -3,6 +3,9 @@
 var app = require('express')();
 var path = require('path');
 var session = require('express-session');
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 var User = require('../api/users/user.model');
 
 
@@ -16,6 +19,10 @@ app.use(require('./statics.middleware'));
 app.use(session({
   secret: 'thisisasecret'
 }));
+
+// Must come after express session middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // app.use(function (req, res, next) {
 //   console.log('session', req.session);
@@ -48,6 +55,34 @@ app.get("/logout", function(req, res, next){
   console.log(req.session)
 });
 
+
+// Google authentication and login 
+app.get('/auth/google', passport.authenticate('google', { scope : 'email' }));
+
+// handle the callback after Google has authenticated the user
+app.get('/auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect : '/', // or wherever
+    failureRedirect : '/' // or wherever
+  })
+);
+
+passport.use(
+  new GoogleStrategy({
+    clientID: '203101702207-h84lfkh2lpcgt90r28em0dlq513rlub6.apps.googleusercontent.com',
+    clientSecret: 'B2T5tVd0VITOoRUBNyFPCOK',
+    callbackURL: 'http://localhost:8080'
+  },
+  // Google will send back the token and profile
+  function (token, refreshToken, profile, done) {
+    // the callback will pass back user profile information and each service (Facebook, Twitter, and Google) will pass it back a different way. Passport standardizes the information that comes back in its profile object.
+    console.log('---', 'in verification callback', profile, '---');
+    done();
+  })
+);
+
+
+/////
 
 app.use('/api', require('../api/api.router'));
 
