@@ -69,8 +69,8 @@ app.get('/auth/google/callback',
 
 passport.use(
   new GoogleStrategy({
-    clientID: '203101702207-h84lfkh2lpcgt90r28em0dlq513rlub6.apps.googleusercontent.com',
-    clientSecret: 'B2T5tVd0VITOoRUBNyFPCOK',
+    clientID: 'ENTER HERE',
+    clientSecret: 'ENTER HERE',
     callbackURL: 'http://localhost:8080'
   },
   // Google will send back the token and profile
